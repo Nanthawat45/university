@@ -1,246 +1,363 @@
 class University {
-    name="";
-    location="";
-    constructor(name,location){
-        this.name =name;
-        this.location =location;
+    name = "";
+    location = "";
+    departments = [];
+    students = [];
+    professors = [];
+    constructor(name, location) {
+        this.name = name;
+        this.location = location
     }
-    addDepartment(department){
-        this.department.push(department);
+    addDepartment(department) {
+        this.departments.push(department)
     }
-    addStudent(student){
-        this.student.push(student);
+    addStudent(student) {
+        this.students.push(student)
     }
-    addProfessor(professor){
-        this.professor.push(professor);
+    addProfessor(professor) {
+        this.professors.push(professor)
     }
-    removeDepartment(){
-        const Person = ["name"];
-        let index = Person.indexOf("departments",1);
-        
+    removeDepartment(department) {
+        const index = this.departments.indexOf(department);
+        if (index !== -1) {
+            this.departments.splice(index, 1);
+        }
     }
-    removeStudent(){
-        const Person = ["name", "address", "email"];
-        let index = Person.indexOf("student",1);
+    removeStudent(student) {
+        const index = this.students.indexOf(student);
+        if (index !== -1) {
+            this.students.splice(index, 1);
+        }
+    }
+    removeProfessor(professor) {
+        const index = this.professors.indexOf(professor);
+        if (index !== -1) {
+            this.professors.splice(index, 1);
+        }
+    }
+    getDepartments() {
+        let department = "";
+        for (let i = 0; i < this.departments.length; i++) {
+            department += this.departments[i].name + ", "
+
+        } return department
 
     }
-    removeProfessor(){
-        const Person = ["name", "address", "email"];
-        let index = Person.indexOf("professor",1);
-    }
-    getDepartments(){
-        return this.departments;
-//         let authorName = "";
-//   for(let i = 0; i < this.authors.lenght; i++) {
-//     authorName += this.authors[i].getName();
-//     if (i <this.authors.lenght - 1) {
-//       authorName += ", ";
-//     }
-//   }
-//   return `a" ${authorName}"`
-        
-    }
-    getStudent(){
-        return this.student;
-    }
-    getProfessor(){
-        return this.professor;
-    }
+    getStudents() {
+        let student = "";
+        for (let i = 0; i < this.students.length; i++) {
+            student += this.students[i].name + ", "
 
-    setDepartment(department){
-        return this.department=department;
+        } return student
     }
-    setStudent(student){
-        return this.student=student;
-    }
-    setProfessor(professor){
-        return this.professor=professor;
-    }
-}
+    getProfessors() {
+        let professor = "";
+        for (let i = 0; i < this.professors.length; i++) {
+            professor += this.professors[i].name + ", "
 
-class Department{
-    name="";
-    constructor(name){
-        this.name=name;
+        } return professor
     }
-    addCourse(course){
-        this.course.push(course);
-    }
-    removeCourse(){
-        const Course = ["code", "title", "email"];
-        let index = Course.indexOf("course",1);
-    }
-    removeStudent(){
-        const Person = ["name", "address", "email"];
-        let index = Person.indexOf("student",1);
-    } 
-    addStudent(){
-    this.student.push(student);
-    }
-    addProfessor(){
-        this.professor.push(Professor);
-    }
-    getCourses(){
-        return this.courses
-    }
-    getStudents(){
-        return this.student
-    }
-    setStudent(student){
-        return this.student=student;
-    }
-    toString(){
-        return `Department:Computer Science`
+    toString() {
+        return `University: ${this.name}, \n\tLocation: ${this.location},\n\tDepartment: ${this.getDepartments()}\n\tStudent: ${this.getStudents()}\n\tProfessor: ${this.getProfessors()}\n`
     }
 }
+//------------- Department
+class Department {
+    name = "";
+    courses = [];
+    students = [];
+    professors = [];
+    constructor(name) {
+        this.name = name;
+    }
+    addCourse(course) {
+        this.courses.push(course);
+    }
+    removeCourse(course) {
+        const index = this.courses.indexOf(course);
+        if (index !== -1) {
+            this.courses.splice(index, 1);
+        }
+    }
+    addStudent(student) {
+        this.students.push(student)
+    }
+    removeStudent(student) {
+        const index = this.students.indexOf(student);
+        if (index !== -1) {
+            this.students.splice(index, 1);
+        }
+    }
+    addProfessor(professor) {
+        this.professors.push(professor)
+    }
+    removeProfessor(professor) {
+        const index = this.professors.indexOf(professor);
+        if (index !== -1) {
+            this.professors.splice(index, 1);
+        }
+    }
+    getCourses() {
+        return this.courses.length
+    }
 
-class Course{
-    code ="";
-    title ="";
-constructor(code,title){
-    this.code=code;
-    this.title=title;
+    getStudents() {
+        let student = "";
+        for (let i = 0; i < this.students.length; i++) {
+            student += this.students[i].name + ", "
+
+        } return student
+    }
+    getProfessors() {
+        let professor = "";
+        for (let i = 0; i < this.professors.length; i++) {
+            professor += this.professors[i].name + ", ";
+        }
+        return professor;
+    }
+    
+    toString() {
+        return `Department: ${this.name},\n\tCourse: ${this.getCourses()}\n\tStudent: ${this.getStudents()}\n\tProfessor: ${this.getProfessors()}\n`
+    }
 }
-addStudent(){
-    this.student.push(student);
+class Course {
+    code = "";
+    title = "";
+    professor = null;
+    students = [];
+    constructor(code, title,professor) {
+        this.code = code;
+        this.title = title;
+        this.professor = professor;
+    }
+    addStudent(student) {
+        this.students.push(student)
+    }
+    removeStudent(student) {
+        const index = this.students.indexOf(student);
+        if (index !== -1) {
+            this.students.splice(index, 1);
+        }
+    }
+    setProfessor(professor) {
+        this.professor = professor
+    }
+    getStudents() {
+        let student = "";
+        for (let i = 0; i < this.students.length; i++) {
+            student += this.students[i].name + ", ";
+        }
+        return student;
+    }
+    
+    getProfessor() {
+        if (this.professor) {
+            return this.professor.name;
+        } else {
+            return "N/A";
+        }
+    }
+    
+    
+    toString() {
+        return `Course: ${this.code} - ${this.title},\n\tProfessor: ${this.getProfessor()},\n\tStudent: ${this.getStudents()}\n`
+    }
+    
 }
-removeStudent(){
-    const Person = ["name", "address", "email"];
-        let index = Person.indexOf("student",1);
-}
-setProfessor(professor){
-    return this.professor=professor;
-}
-getProfessor(){
-    return this.professor
-}
-setStudent(student){
-    return this.student=student;
-}
-toString(){
-    return `Course = [Code: ${this.code},Title: ${this.title}]`
-}
-}
-
-class Professor{
-    name="";
-    staffId="";
-constructor(name,staffId){
-    this.name=name;
-    this.staffId=staffId;
-}
-teachCourse(){
-
-}
-stopTeachingCourse(){
-
-}
-getCourses(){
-
-}
-toString(){
-    return `Professor = [Name: ${this.name},StaffID: ${this.staffId}]`
-}
-}
-
-class Student{
-    studentId="";
-    year=0;
-constructor(studentId,year){
-    this.studentId=studentId;
-    this.year=year;
-}
-regiserCourse(){
-
-}
-dropCourse(){
-
-}
-getCourses(){
-
-}
-toString(){
-    return `Student = [StudentId: ${this.studentId},Year: ${this.year}]`
-}
+//----------PerSon
+class Person {
+    name = "";
+    address = "";
+    email = "";
+    constructor(name, address, email) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+    }
+    toString() {
+        return `Person: ${this.name}, ${this.address}, ${this.email}`
+    }
 }
 
-class Person{
-    name="";
-    address="";
-    email="";
-constructor(name,address,email){
-    this.name=name;
-    this.address=address;
-    this.email=email;
+//-------------Student
+class Student extends Person {
+    studentId = "";
+    year = 0;
+    courses = [];
+    constructor(name, address, email, studentId, year) {
+        super(name, address, email);
+        this.studentId = studentId;
+        this.year = year;
+    }
+    registerCourse(course) {
+        this.courses.push(course)
+    }
+    dropCourse(course) {
+        const index = this.courses.indexOf(course);
+        if (index !== -1) {
+            this.courses.splice(index, 1);
+        }
+    }
+    getCourses() {
+        let course = []; // กำหนดตัวแปร course ให้เป็น string ว่างไว้ก่อน
+        for (let i = 0; i < this.courses.length; i++) {
+            course += this.courses[i].title + ", ";
+        }
+        return course; // ส่งค่า course กลับ
+    }
+    
+
+    toString() {
+        return `Student: ${this.name}, Student ID: ${this.studentId}, Year: ${this.year},\n\tCourses: ${this.getCourses()}\n`
+    }
 }
-toString(){
-    return `Professor = [Name: ${this.name},Address: ${this.address},Email: ${this.email}]`
+class Professor extends Person {
+    staffId = "";
+    courses = [];
+    constructor(name, address, email, staffId) {
+        super(name, address, email)
+        this.staffId = staffId;
+    }
+    teachCourse(course) {
+        this.courses.push(course)
+    }
+    stopTeachingCourse(course) {
+        const index = this.courses.indexOf(course);
+        if (index !== -1) {
+            this.courses.splice(index, 1);
+        }
+    }
+    getCourses() {
+        let course = []; // กำหนดตัวแปร course ให้เป็น string ว่างไว้ก่อน
+        for (let i = 0; i < this.courses.length; i++) {
+            course += this.courses[i].title + ", ";
+        }
+        return course; // ส่งค่า course กลับ
+    }
+    
+    toString() {
+        return `Professor: ${this.name}, Staff ID: ${this.staffId},\n\tCourses: ${this.getCourses()}\n`
+    }
 }
+main = () => {
+    // Creating University
+  const myUniversity = new University(
+    "Nakhon Pathom Rajabhat University",
+    "85 Malaiman Road, Nakhon Pathom, Thailand"
+  );
+
+  // Creating Departments
+  const department1 = new Department("Computer Science");
+  const department2 = new Department("Software Engineering");
+
+  // Adding Departments to University
+  myUniversity.addDepartment(department1);
+  myUniversity.addDepartment(department2);
+
+  // Creating Students
+  const student1 = new Student(
+    "Alice",
+    "123 Kanchanaburi",
+    "alice@example.com",
+    "S001",
+    1
+  );
+  const student2 = new Student(
+    "Bob",
+    "456 Ratchaburi",
+    "bob@example.com",
+    "S002",
+    2
+  );
+
+  // Adding Students to University
+  myUniversity.addStudent(student1);
+  myUniversity.addStudent(student2);
+
+  // Adding Students to Department
+  department1.addStudent(student1);
+  department2.addStudent(student2);
+
+  
+  // Creating Professors
+const professor1 = new Professor(
+    "Dr. Worachet Uttha",
+    "789 Phetchakaseam road",
+    "wuttha@example.com",
+    "P001"
+);
+const professor2 = new Professor(
+    "Dr. Udsanee Pakdeetrakulwong",
+    "101 Wangtaku",
+    "udsanee@example.com",
+    "P002"
+);
+
+
+  // Adding Professors to University
+  myUniversity.addProfessor(professor1);
+  myUniversity.addProfessor(professor2);
+  //adding Professor to department
+  department1.addProfessor(professor1);
+  department2.addProfessor(professor2);
+  // Creating Courses
+ // Creating Courses
+const course1 = new Course(
+    "CS101",
+    "Introduction to Programming",
+    professor1
+);
+const course2 = new Course(
+    "SE101",
+    "Introduction of Database Design",
+    professor2
+);
+
+
+  //adding student to course
+  course1.addStudent(student1);
+  course2.addStudent(student2);
+
+  // Registering Students to Courses
+  student1.registerCourse(course1);
+  student2.registerCourse(course2);
+
+  // Teaching Courses by Professors
+  professor1.teachCourse(course1);
+  professor2.teachCourse(course2);
+
+  //add course to department
+  department1.addCourse(course1);
+  department2.addCourse(course2);
+
+  // Printing Information
+  console.log(myUniversity.toString());
+  console.log(department1.toString());
+  console.log(department2.toString());
+  console.log(course1.toString());
+  console.log(course2.toString());
+  console.log(student1.toString());
+  console.log(student2.toString());
+  console.log(professor1.toString());
+  console.log(professor2.toString());
+
+  // Printing all students in the university
+  console.log("Students in the University:");
+  myUniversity.students.forEach((student) => {
+    console.log(student.toString());
+  });
+
+  // Printing all professors in the university
+  console.log("Professors in the University:");
+  myUniversity.professors.forEach((professor) => {
+    console.log(professor.toString());
+  });
+
+  // Printing all departments in the university
+  console.log("Departments in the University:");
+  myUniversity.departments.forEach((department) => {
+    console.log(department.toString());
+  });
 }
 
-const main =() => {
-    const person1 =new Person("Alice","Nakhon Pathom","Alice123@gmail.com");
-    const person2 =new Person("Bob","Nakhon Pathom","Bob123@gmail.com");
-
-
-    const student1 =new Student("001","21");
-    const student2 =new Student("002","20");
-    const student3 =new Student("003","20");
-
-    const professor1 =new Professor("Dr. Worachet Uttha");
-    const professor2 =new Professor("Dr. Udsanee Pakdeetrakulwong");
-
-    const professor3 =new Professor("Dr. Worachet Uttha", "P001");
-    const professor4 =new Professor("Dr. Udsanee Pakdeetrakulwong", "P002");
-
-    const course1 =new Course("SE101 - ","Introduction of Database Design");
-    const course2 =new Course("CS101 - ","Introduction to Programming");
-
-    const department1 =new Department("Software Engineering");
-    const department2 =new Department("Computer Science");
-
-    const university1 =new University("Nakhon Pathom Rajabhat","85 Malaiman Road, Nakhon Pathom", "Thailand");
-
-    // const test1 = new Department
-
-    console.log("Department: ","Computer Science");
-    console.log(course2,"Alice",professor1);
-    console.log();
-
-    console.log("Department: ","Software Engineering");
-    console.log(course1,"Bob",professor2);
-    console.log();
-
-    console.log("Course: ",course2);
-    console.log(professor1,"Alice");
-    console.log();
-
-    console.log("Course: ",course2);
-    console.log(professor1,"Bob");
-    console.log();
-
-    console.log("Student", person1.name,student1);
-    console.log("Course: ",course2);
-    console.log();
-    console.log("Student", person2.name,student2);
-    console.log("Course: ",course1);
-    console.log();
-
-    console.log("Professor: ",professor3);
-    console.log("Course: ",course2);
-    console.log();
-    console.log("Professor: ",professor4);
-    console.log("Course: ",course1);
-    console.log();
-
-    console.log("Student in the University");
-    console.log(person1.name,student1);
-    console.log("Course: ",course1);
-    console.log();
-    console.log("Student in the University");
-    console.log(person1.name,student1);
-    console.log("Course: ",course2);
-    console.log();
-
-};
-main();
+main()
